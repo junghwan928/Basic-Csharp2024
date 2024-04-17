@@ -317,3 +317,20 @@
 
 - WPF
 - 예제 프로젝트
+
+## 5일차
+- 윈폼 UI 개발(계속)
+    - 스레드 추가
+        - 프로세스를 나누어서 여러가지 일 진행
+        - 스레드 사용하기 불편함
+        - C# BackgroundWorker 클래스를 추가(Thread 사용하여 만들기 편하게 사용)
+
+- 파일 입출력 추가
+    - 리치텍스트박스(Like MSWord, 한글워드)로 파일저장
+
+- 비동기 작업 앱
+- 윈도우 탐색기앱
+- 도서관리 앱 with SQL Server
+- ModernUI 앱
+- 국가교통정보 센터 CCTV뷰 앱
+- IOT Dummy 앱 withn SQL SEver

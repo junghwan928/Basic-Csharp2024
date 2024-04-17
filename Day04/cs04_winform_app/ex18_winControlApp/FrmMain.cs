@@ -1,4 +1,6 @@
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using System.Threading;
+using System.ComponentModel;
 
 namespace ex18_winControlApp
 {
@@ -105,7 +107,10 @@ namespace ex18_winControlApp
             FrmModaless.Width = 300;
             FrmModaless.Height = 100;
             FrmModaless.BackColor = Color.Green;
-            FrmModaless.StartPosition = FormStartPosition.CenterParent;
+            // 모달리스창을 부모 정중앙에 위치할 때는 아래와 같이 작업 해야함
+            FrmModaless.StartPosition = FormStartPosition.Manual;
+            FrmModaless.Location = new Point(this.Location.X + (this.Width - FrmModaless.Width) / 2,
+                                             this.Location.Y + (this.Height - FrmModaless.Height) / 2);
             FrmModaless.Show(); // 모달리스창 띄우기
         }
 
@@ -207,5 +212,122 @@ namespace ex18_winControlApp
             }
 
         }
+
+        private void btnNoThread_Click(object sender, EventArgs e)
+        {
+            //프로그레스 바 설정
+            var maxValue = 100;
+            var currValue = 0;
+            prgProcess.Minimum = 0;
+            prgProcess.Maximum = maxValue;
+            prgProcess.Value = currValue; // 0으로 초기화
+
+            btnThread.Enabled = false;
+            btnNoThread.Enabled = false;
+            btnStop.Enabled = true;
+
+            // 반복 시작
+            for (var i = 0; i <= maxValue; i++)
+            {
+                // 내부적으로 복잡하고 시간이 많이 걸리는 작업
+                currValue = i;
+                prgProcess.Value = currValue;
+                txtLog.AppendText($"현재 진행 : {currValue}\r\n");
+                Thread.Sleep(500); //1000ms = 1초 , 500ms = 0.5초
+
+            }
+
+            btnThread.Enabled = btnNoThread.Enabled = true;
+            btnStop.Enabled = false;
+
+        }
+
+        private void btnThread_Click(object sender, EventArgs e)
+        {
+            var maxValue = 100;
+            prgProcess.Minimum = 0;
+            prgProcess.Maximum = maxValue;
+            prgProcess.Value = 0; // 0으로 초기화
+
+            btnThread.Enabled = btnNoThread.Enabled = false;
+            btnStop.Enabled = true;
+
+            BgwProgress.WorkerReportsProgress = true; //진행사항 리포트 활성화
+            BgwProgress.WorkerSupportsCancellation = true; // 백그라운드 워커 취소 활성화
+            BgwProgress.RunWorkerAsync(null); // 백그라운드워커 실행
+
+        }
+
+        
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            BgwProgress.CancelAsync(); // 비동기로 취소
+        }
+
+        #region '백그라운드 워커 이벤트 핸들러'
+
+        private void DoRealWork(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            var maxValue = 100;
+            var currValue = 0;
+
+            for (var i = 0; i <= maxValue; i++)
+            {
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    // 숫자를 증가시키고 UI에 반영
+                    currValue = i;
+                    worker.ReportProgress((currValue * 100) / maxValue);
+                    System.Threading.Thread.Sleep(500);
+                }
+            }
+        }
+        // 일을 진행
+        private void BgwProgress_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            DoRealWork((BackgroundWorker)sender, e);
+            e.Result = null;
+        }
+
+        // 진행상태 바뀌는 것 표시
+        private void BgwProgress_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            // 진행 상태를 업데이트하거나 UI에 표시하는 등의 작업을 수행할 수 있습니다.
+            // 예를 들어, 진행 상태를 프로그레스 바에 반영할 수 있습니다.
+            prgProcess.Value = e.ProgressPercentage;
+            txtLog.AppendText($"진행률 : {prgProcess.Value} %\r\n");
+        }
+
+        //진행이 완료 되면 그 이후 처리
+        private void BgwProgress_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            // 작업이 완료되었을 때 수행할 작업을 구현할 수 있습니다.
+            if (e.Cancelled)
+            {
+                // 작업이 취소되었을 때 수행할 작업을 구현합니다.
+                txtLog.AppendText($"작업이 취소되었습니다.\r\n");
+            }
+            else if (e.Error != null)
+            {
+                // 작업 중 오류가 발생했을 때 수행할 작업을 구현합니다.
+                MessageBox.Show($"오류가 발생했습니다: {e.Error.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                // 작업이 성공적으로 완료되었을 때 수행할 작업을 구현합니다.
+                txtLog.AppendText($"작업이 완료되었습니다.\r\n");
+            }
+
+            // 작업이 완료되면 버튼 등의 상태를 다시 설정할 수 있습니다.
+            btnThread.Enabled = btnNoThread.Enabled = true;
+            btnStop.Enabled = false;
+        }
+
+        #endregion
     }
 }

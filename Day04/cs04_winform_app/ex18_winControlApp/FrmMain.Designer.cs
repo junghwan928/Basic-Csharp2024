@@ -50,15 +50,18 @@
             groupBox5 = new GroupBox();
             BtnLoad = new Button();
             PicNormal = new PictureBox();
-            DlgOpenImage = new OpenFileDialog();
             GrbEditor = new GroupBox();
             BtnFileSave = new Button();
             BtnFileLoad = new Button();
             RtxEditor = new RichTextBox();
-            openFileDialog1 = new OpenFileDialog();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             groupBox6 = new GroupBox();
-            textBox1 = new TextBox();
+            btnStop = new Button();
+            btnThread = new Button();
+            btnNoThread = new Button();
+            prgProcess = new ProgressBar();
+            txtLog = new TextBox();
+            DlgOpenImage = new OpenFileDialog();
+            BgwProgress = new System.ComponentModel.BackgroundWorker();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TrbDummy).BeginInit();
@@ -313,7 +316,7 @@
             // 
             // BtnFileSave
             // 
-            BtnFileSave.Location = new Point(274, 482);
+            BtnFileSave.Location = new Point(181, 482);
             BtnFileSave.Name = "BtnFileSave";
             BtnFileSave.Size = new Size(76, 35);
             BtnFileSave.TabIndex = 4;
@@ -323,7 +326,7 @@
             // 
             // BtnFileLoad
             // 
-            BtnFileLoad.Location = new Point(193, 482);
+            BtnFileLoad.Location = new Point(100, 482);
             BtnFileLoad.Name = "BtnFileLoad";
             BtnFileLoad.Size = new Size(76, 35);
             BtnFileLoad.TabIndex = 3;
@@ -339,13 +342,13 @@
             RtxEditor.TabIndex = 0;
             RtxEditor.Text = "";
             // 
-            // openFileDialog1
-            // 
-            openFileDialog1.FileName = "openFileDialog1";
-            // 
             // groupBox6
             // 
-            groupBox6.Controls.Add(textBox1);
+            groupBox6.Controls.Add(btnStop);
+            groupBox6.Controls.Add(btnThread);
+            groupBox6.Controls.Add(btnNoThread);
+            groupBox6.Controls.Add(prgProcess);
+            groupBox6.Controls.Add(txtLog);
             groupBox6.Location = new Point(436, 316);
             groupBox6.Name = "groupBox6";
             groupBox6.Size = new Size(382, 226);
@@ -353,13 +356,59 @@
             groupBox6.TabStop = false;
             groupBox6.Text = "Thread, 백그라운드 워커";
             // 
-            // textBox1
+            // btnStop
             // 
-            textBox1.Location = new Point(6, 22);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(370, 23);
-            textBox1.TabIndex = 0;
+            btnStop.Enabled = false;
+            btnStop.Location = new Point(244, 178);
+            btnStop.Name = "btnStop";
+            btnStop.Size = new Size(63, 35);
+            btnStop.TabIndex = 4;
+            btnStop.Text = "Stop";
+            btnStop.UseVisualStyleBackColor = true;
+            btnStop.Click += btnStop_Click;
+            // 
+            // btnThread
+            // 
+            btnThread.Location = new Point(159, 178);
+            btnThread.Name = "btnThread";
+            btnThread.Size = new Size(76, 35);
+            btnThread.TabIndex = 3;
+            btnThread.Text = "Thread";
+            btnThread.UseVisualStyleBackColor = true;
+            btnThread.Click += btnThread_Click;
+            // 
+            // btnNoThread
+            // 
+            btnNoThread.Location = new Point(64, 178);
+            btnNoThread.Name = "btnNoThread";
+            btnNoThread.Size = new Size(89, 35);
+            btnNoThread.TabIndex = 2;
+            btnNoThread.Text = "No Thread";
+            btnNoThread.UseVisualStyleBackColor = true;
+            btnNoThread.Click += btnNoThread_Click;
+            // 
+            // prgProcess
+            // 
+            prgProcess.Location = new Point(6, 149);
+            prgProcess.Name = "prgProcess";
+            prgProcess.Size = new Size(370, 23);
+            prgProcess.TabIndex = 1;
+            // 
+            // txtLog
+            // 
+            txtLog.Location = new Point(6, 22);
+            txtLog.Multiline = true;
+            txtLog.Name = "txtLog";
+            txtLog.Size = new Size(370, 113);
+            txtLog.TabIndex = 0;
+            // 
+            // BgwProgress
+            // 
+            BgwProgress.WorkerReportsProgress = true;
+            BgwProgress.WorkerSupportsCancellation = true;
+            BgwProgress.DoWork += BgwProgress_DoWork;
+            BgwProgress.ProgressChanged += BgwProgress_ProgressChanged;
+            BgwProgress.RunWorkerCompleted += BgwProgress_RunWorkerCompleted;
             // 
             // FrmMain
             // 
@@ -416,14 +465,17 @@
         private GroupBox groupBox5;
         private PictureBox PicNormal;
         private Button BtnLoad;
-        private OpenFileDialog DlgOpenImage;
         private GroupBox GrbEditor;
         private RichTextBox RtxEditor;
         private Button BtnFileSave;
         private Button BtnFileLoad;
-        private OpenFileDialog openFileDialog1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private GroupBox groupBox6;
-        private TextBox textBox1;
+        private TextBox txtLog;
+        private Button btnStop;
+        private Button btnThread;
+        private Button btnNoThread;
+        private ProgressBar prgProcess;
+        private OpenFileDialog DlgOpenImage;
+        private System.ComponentModel.BackgroundWorker BgwProgress;
     }
 }
