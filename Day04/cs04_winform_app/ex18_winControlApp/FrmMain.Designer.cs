@@ -55,6 +55,10 @@
             BtnFileSave = new Button();
             BtnFileLoad = new Button();
             RtxEditor = new RichTextBox();
+            openFileDialog1 = new OpenFileDialog();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            groupBox6 = new GroupBox();
+            textBox1 = new TextBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TrbDummy).BeginInit();
@@ -63,6 +67,7 @@
             groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PicNormal).BeginInit();
             GrbEditor.SuspendLayout();
+            groupBox6.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -269,7 +274,7 @@
             groupBox5.Controls.Add(PicNormal);
             groupBox5.Location = new Point(430, 12);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(375, 529);
+            groupBox5.Size = new Size(375, 298);
             groupBox5.TabIndex = 4;
             groupBox5.TabStop = false;
             groupBox5.Text = "픽처박스";
@@ -334,11 +339,34 @@
             RtxEditor.TabIndex = 0;
             RtxEditor.Text = "";
             // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(textBox1);
+            groupBox6.Location = new Point(436, 316);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(382, 226);
+            groupBox6.TabIndex = 6;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Thread, 백그라운드 워커";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(6, 22);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(370, 23);
+            textBox1.TabIndex = 0;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1193, 553);
+            Controls.Add(groupBox6);
             Controls.Add(GrbEditor);
             Controls.Add(groupBox5);
             Controls.Add(groupBox4);
@@ -359,6 +387,8 @@
             groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PicNormal).EndInit();
             GrbEditor.ResumeLayout(false);
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -391,5 +421,9 @@
         private RichTextBox RtxEditor;
         private Button BtnFileSave;
         private Button BtnFileLoad;
+        private OpenFileDialog openFileDialog1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private GroupBox groupBox6;
+        private TextBox textBox1;
     }
 }

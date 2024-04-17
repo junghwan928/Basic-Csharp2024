@@ -94,6 +94,7 @@ namespace ex18_winControlApp
             FrmModal.Width = 300;
             FrmModal.Height = 100;
             FrmModal.BackColor = Color.Red;
+            FrmModal.StartPosition = FormStartPosition.CenterParent;
             FrmModal.ShowDialog(); // 모달창 띄우기
         }
 
@@ -104,6 +105,7 @@ namespace ex18_winControlApp
             FrmModaless.Width = 300;
             FrmModaless.Height = 100;
             FrmModaless.BackColor = Color.Green;
+            FrmModaless.StartPosition = FormStartPosition.CenterParent;
             FrmModaless.Show(); // 모달리스창 띄우기
         }
 
@@ -115,14 +117,14 @@ namespace ex18_winControlApp
 
         private void BtnQuestion_Click(object sender, EventArgs e)
         {
-            var res = MessageBox.Show("좋아요?", "질문", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var res = MessageBox.Show("좋아?", "질문", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
             {
-                MessageBox.Show("네 좋아요!");
+                MessageBox.Show("좋아!");
             }
             else if (res == DialogResult.No)
             {
-                MessageBox.Show("아뇨 정말 싫어요!!!!");
+                MessageBox.Show("싫어!!!!");
             }
         }
 
@@ -188,6 +190,7 @@ namespace ex18_winControlApp
             Dialog.Filter = "Text Files(*.txt;, *.cs;, *.py)|*.txt;, *.cs;, *.py ";
             if (Dialog.ShowDialog() == DialogResult.OK)
             {
+                // UTF-8이 한글이 깨짐. EUC-KR(WINDOW 949), UTF-8(BOM)은 한글이 문제 없음.
                 RtxEditor.LoadFile(Dialog.FileName, RichTextBoxStreamType.PlainText);
             }
 
