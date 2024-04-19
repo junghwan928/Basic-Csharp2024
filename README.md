@@ -351,9 +351,11 @@
 ## 7일차
 - 토이 프로젝트
     - 윈도우 탐색기 앱 종료
+      https://github.com/junghwan928/Basic-Csharp2024/blob/main/images/end.mp4
     - ModernUI 앱(UI 디자인)
     - 도서관리 앱 with SQL Server(Base)
         - MordenUI
+        - 
 
 ## 8일차
 - 토이 프로젝트
