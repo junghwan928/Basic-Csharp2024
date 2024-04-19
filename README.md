@@ -326,11 +326,45 @@
         - C# BackgroundWorker 클래스를 추가(Thread 사용하여 만들기 편하게 사용)
 
 - 파일 입출력 추가
-    - 리치텍스트박스(Like MSWord, 한글워드)로 파일저장
+        - 리치텍스트박스(like MSWord, 한글워드)로 파일저장
 
-- 비동기 작업 앱
-- 윈도우 탐색기앱
-- 도서관리 앱 with SQL Server
-- ModernUI 앱
-- 국가교통정보 센터 CCTV뷰 앱
-- IOT Dummy 앱 withn SQL SEver
+        <img src="https://raw.githubusercontent.com/hugoMGSung/basic-csharp-2024/main/images/cs003.png" width="850">
+
+    - 비동기 작업 앱
+        - 가장 트렌드가 되는 작업방법
+        - 백그라운드 처리는 Thread, BackgroundWorker와 유사
+        - async, await 키워드
+
+        ![비동기앱](https://raw.githubusercontent.com/hugoMGSung/basic-csharp-2024/main/images/cs004.png)
+
+## 6일차
+- 토이 프로젝트
+    - 윈도우 탐색기 앱(컨트롤학습)
+        - MyExplorer 프로젝트 생성
+        - 아이콘검색, png 2 ico 구글링 웹사이트
+        - 트리뷰, 리스트뷰 기능 추가
+
+        ![중간결과](https://raw.githubusercontent.com/hugoMGSung/basic-csharp-2024/main/images/cs005.png)
+
+        - 미적용 - 컨텍스트메뉴 보기 기능, 더블클릭 프로그램 실행, ...
+
+## 7일차
+- 토이 프로젝트
+    - 윈도우 탐색기 앱 종료
+    - ModernUI 앱(UI 디자인)
+    - 도서관리 앱 with SQL Server(Base)
+        - MordenUI
+
+## 8일차
+- 토이 프로젝트
+    - 도서관리 앱 with SQL Server(Base)
+    - 국가교통정보센터 CCTV뷰 앱(OpenAPI, NuGet dll, Network)
+        - Open API, NuGet dll, Network, UI = 디자인, 비동기 메서드
+    - IoT Dummy 앱 with SQL Server(IoT, DB)
+
+
+## 개인 토이프로젝트
+- 심플 메모장앱
+    - 기능....
+    - 특징
+    - 배운점
